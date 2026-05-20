@@ -1,0 +1,215 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* ── Light palette ── */
+  --color-background:    #FFFFFF;
+  --color-surface:       #F7F9FC;
+  --color-surface-hover: #EDF1F7;
+  --color-border:        #E2E8F0;
+  --color-border-light:  #F1F5F9;
+  --color-text-dark:     #1E293B;
+  --color-text-muted:    #64748B;
+  --color-text-light:    #94A3B8;
+  --color-primary:       #2563EB;
+  --color-primary-hover: #1D4ED8;
+  --color-primary-light: #DBEAFE;
+  --color-primary-glow:  #3B82F6;
+  --color-success:       #10B981;
+  --color-success-light: #D1FAE5;
+  --color-warning:       #F59E0B;
+  --color-warning-light: #FEF3C7;
+  --color-danger:        #EF4444;
+  --color-danger-light:  #FEE2E2;
+  --color-q1:            #EF4444;
+  --color-q2:            #2563EB;
+  --color-q3:            #F59E0B;
+  --color-q4:            #64748B;
+  --color-glass:         rgba(255,255,255,0.72);
+  --color-glass-border:  rgba(226,232,240,0.6);
+
+  /* ── Premium Dark palette — deep obsidian + violet undertones ── */
+  /* Layering: bg → surface → card → surface-hover */
+  --color-dark-bg:            #08080F;   /* deepest layer — page bg */
+  --color-dark-surface:       #10101A;   /* sidebar */
+  --color-dark-card:          #16161F;   /* widget cards */
+  --color-dark-surface-hover: #1D1D2A;   /* hover states / inputs */
+  --color-dark-border:        rgba(255,255,255,0.07);  /* subtle white-alpha borders */
+  --color-dark-border-mid:    rgba(255,255,255,0.11);  /* slightly brighter borders */
+  --color-dark-border-accent: rgba(99,102,241,0.3);    /* indigo glow border for active */
+  --color-dark-border-light:  rgba(255,255,255,0.04);
+  --color-dark-text:          #F0F0FF;   /* slightly warm white */
+  --color-dark-text-muted:    #8A8AAA;   /* violet-tinted muted */
+  --color-dark-text-light:    #4A4A6A;   /* very dim */
+  --color-dark-primary-light: rgba(99,102,241,0.14);   /* indigo tint bg */
+  --color-dark-success-light: rgba(16,185,129,0.13);
+  --color-dark-warning-light: rgba(245,158,11,0.13);
+  --color-dark-danger-light:  rgba(239,68,68,0.13);
+  --color-dark-glass:         rgba(8,8,15,0.85);
+  --color-dark-glass-border:  rgba(255,255,255,0.07);
+}
+
+/* ─────────────────────── Base ─────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  transition: background-color 0.4s ease;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-dark);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.4s ease, color 0.3s ease;
+}
+
+.dark body {
+  background-color: var(--color-dark-bg);
+  color: var(--color-dark-text);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(99,102,241,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 100% 0%, rgba(139,92,246,0.04) 0%, transparent 50%);
+  background-attachment: fixed;
+}
+
+/* ─────────────────────── Animations ─────────────────────── */
+@keyframes fade-in       { from { opacity:0; transform:translateY(8px);  } to { opacity:1; transform:translateY(0);  } }
+@keyframes slide-up      { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0);  } }
+@keyframes scale-in      { from { opacity:0; transform:scale(0.95);      } to { opacity:1; transform:scale(1);       } }
+@keyframes slide-in-right{ from { opacity:0; transform:translateX(16px); } to { opacity:1; transform:translateX(0);  } }
+@keyframes frog-bounce   { 0%,100% { transform:translateY(0);  } 50% { transform:translateY(-4px); } }
+@keyframes streak-pulse  { 0%,100% { transform:scale(1);       } 50% { transform:scale(1.12);      } }
+@keyframes check-pop     { 0% { transform:scale(0); } 50% { transform:scale(1.3); } 100% { transform:scale(1); } }
+@keyframes spin          { to { transform:rotate(360deg); } }
+@keyframes bounce-in     { 0% { transform:scale(0.3);opacity:0; } 50% { transform:scale(1.05); } 70% { transform:scale(0.95); } 100% { transform:scale(1);opacity:1; } }
+@keyframes breathe       { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+
+@keyframes pulse-glow {
+  0%,100% { box-shadow: 0 0 0 0 rgba(99,102,241,0.4); }
+  50%      { box-shadow: 0 0 0 10px rgba(99,102,241,0); }
+}
+@keyframes card-shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+@keyframes glow-pulse {
+  0%,100% { opacity: 0.5; }
+  50%      { opacity: 1; }
+}
+
+.animate-fade-in     { animation: fade-in 0.5s ease-out both; }
+.animate-slide-up    { animation: slide-up 0.4s ease-out both; }
+.animate-scale-in    { animation: scale-in 0.3s ease-out both; }
+.animate-pulse-glow  { animation: pulse-glow 2s ease-in-out infinite; }
+.animate-spin        { animation: spin 1s linear infinite; }
+.animate-bounce-in   { animation: bounce-in 0.5s ease-out both; }
+.animate-streak      { animation: streak-pulse 2s ease-in-out infinite; }
+.animate-check       { animation: check-pop 0.3s ease-out both; }
+.animate-slide-right { animation: slide-in-right 0.4s ease-out both; }
+.animate-frog        { animation: frog-bounce 2s ease-in-out infinite; }
+.animate-breathe     { animation: breathe 8s ease-in-out infinite; }
+
+.stagger-children > *:nth-child(1) { animation-delay:0ms;   }
+.stagger-children > *:nth-child(2) { animation-delay:60ms;  }
+.stagger-children > *:nth-child(3) { animation-delay:120ms; }
+.stagger-children > *:nth-child(4) { animation-delay:180ms; }
+.stagger-children > *:nth-child(5) { animation-delay:240ms; }
+.stagger-children > *:nth-child(6) { animation-delay:300ms; }
+.stagger-children > *:nth-child(7) { animation-delay:360ms; }
+.stagger-children > *:nth-child(8) { animation-delay:420ms; }
+
+/* ─────────────────────── Widget Card ─────────────────────── */
+.widget-card {
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  transition: box-shadow 0.25s ease, transform 0.25s ease, background-color 0.35s ease, border-color 0.35s ease;
+}
+.widget-card:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  transform: translateY(-1px);
+}
+
+/* Dark card — rich layered look with subtle glow border on hover */
+.dark .widget-card {
+  background: var(--color-dark-card);
+  border-color: var(--color-dark-border);
+  box-shadow:
+    0 1px 0 0 rgba(255,255,255,0.04) inset,
+    0 2px 12px rgba(0,0,0,0.4);
+}
+.dark .widget-card:hover {
+  border-color: var(--color-dark-border-mid);
+  box-shadow:
+    0 1px 0 0 rgba(255,255,255,0.06) inset,
+    0 8px 32px rgba(0,0,0,0.5),
+    0 0 0 1px rgba(99,102,241,0.12);
+  transform: translateY(-1px);
+}
+
+/* ─────────────────────── Glass Card ─────────────────────── */
+.glass-card {
+  background: var(--color-glass);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--color-glass-border);
+  border-radius: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  transition: all 0.25s ease;
+}
+.glass-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); transform: translateY(-1px); }
+
+.dark .glass-card {
+  background: rgba(22,22,31,0.75);
+  backdrop-filter: blur(20px);
+  border-color: var(--color-dark-border);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+
+/* ─────────────────────── Dark Sidebar ─────────────────────── */
+.dark aside {
+  background: var(--color-dark-surface) !important;
+  border-right-color: var(--color-dark-border) !important;
+  /* Subtle gradient shimmer at top */
+  background-image: linear-gradient(180deg, rgba(99,102,241,0.04) 0%, transparent 30%) !important;
+}
+
+/* ─────────────────────── Dark Main ─────────────────────── */
+.dark main {
+  background: var(--color-dark-bg) !important;
+}
+
+/* ─────────────────────── Dark Input ─────────────────────── */
+.dark input, .dark textarea, .dark select {
+  caret-color: #818CF8;
+}
+.dark input::selection, .dark textarea::selection {
+  background: rgba(99,102,241,0.3);
+}
+
+/* ─────────────────────── Scrollbar ─────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-text-light); }
+.dark ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); }
+.dark ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.16); }
+
+/* ─────────────────────── Dark Badge / Tag ─────────────────────── */
+.dark .badge-primary {
+  background: rgba(99,102,241,0.18);
+  color: #A5B4FC;
+  border: 1px solid rgba(99,102,241,0.25);
+}
+
+/* ─────────────────────── Misc dark utilities ─────────────────────── */
+.dark .divider {
+  border-color: var(--color-dark-border);
+}
