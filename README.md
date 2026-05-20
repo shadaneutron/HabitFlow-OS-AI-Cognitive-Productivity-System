@@ -175,7 +175,6 @@ graph TD
 # 📸 Screenshots
 
 ## Dashboard
-> Add dashboard screenshot here
 
 <img width="1915" height="863" alt="image" src="https://github.com/user-attachments/assets/c9d59ca5-555c-4538-9773-9876261066f4" />
 <img width="1918" height="873" alt="image" src="https://github.com/user-attachments/assets/b85bd59a-ef19-45e1-a92a-54837389cb2f" />
@@ -183,7 +182,6 @@ graph TD
 ---
 
 ## Tiny Mode
-> Add Tiny Mode screenshot here
 
 <img width="1615" height="859" alt="image" src="https://github.com/user-attachments/assets/e3c92829-49fc-47dd-a380-8272bcd1960e" />
 <img width="1547" height="852" alt="image" src="https://github.com/user-attachments/assets/c282fc54-9af4-47b4-9850-80fee5b1b913" />
@@ -191,21 +189,18 @@ graph TD
 ---
 
 ## Brain Dump AI
-> Add Brain Dump screenshot here
 
 <img width="1607" height="865" alt="image" src="https://github.com/user-attachments/assets/24caa450-9950-49eb-abed-6da0285d98a5" />
 
 ---
 
 ## Eisenhower Matrix
-> Add Matrix screenshot here
 
 <img width="1609" height="865" alt="image" src="https://github.com/user-attachments/assets/82804084-525b-4f14-a2e3-d76fb8cbde48" />
 
 ---
 
 ## Time Blocking
-> Add Time Blocking screenshot here
 
 <img width="1609" height="861" alt="image" src="https://github.com/user-attachments/assets/24ba29bc-2c71-4159-b257-c99458c43597" />
 
